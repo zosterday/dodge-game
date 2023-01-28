@@ -59,3 +59,10 @@ sysinfo.txt
 crashlytics-build.properties
 
 dodge/Library/PackageCache/com.unity.burst@1.6.6/.Runtime/hostmac/lld
+dodge/Temp/FSTimeGet-be4d84799d1434a48a8d416fd3f82090
+dodge/Library/SourceAssetDB
+*.log
+*.json
+*.db
+*.dll
+*.map
