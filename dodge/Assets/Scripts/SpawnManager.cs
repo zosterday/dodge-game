@@ -36,12 +36,11 @@ public class SpawnManager : MonoBehaviour
     {
         if (!gameManager.IsGameActive)
         {
-            return;
-        }
-
-        if (GameManager.GameEnded && !gameOver)
-        {
-            CancelSpawns();
+            if (GameManager.GameEnded && !gameOver)
+            {
+                CancelSpawns();
+                return;
+            }
             return;
         }
 
