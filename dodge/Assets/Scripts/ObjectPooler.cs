@@ -6,7 +6,7 @@ public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler Instance;
 
-    private const int ObstaclePoolAmount = 200;
+    private const int ObstaclePoolAmount = 300;
 
     [SerializeField]
     private GameObject obstacleObj;
@@ -33,7 +33,7 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    public GameObject GetCheckpointObject()
+    public GameObject GetObstacleObject()
     {
         foreach (var checkpoint in obstaclePool)
         {

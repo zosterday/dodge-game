@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameManager.IsGameActive)
+        {
+            return;
+        }
         //Update player position
         UpdatePosition();
     }

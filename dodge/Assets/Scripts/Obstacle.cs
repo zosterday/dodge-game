@@ -8,12 +8,35 @@ public class Obstacle : MonoBehaviour
 
     private void Start()
     {
-        speed = Random.Range(1.5f, 4f);
+        speed = Random.Range(2f, 8f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
+        if (CheckOutOfBounds())
+        {
+            gameObject.SetActive(false);
+        }
         transform.Translate(Vector3.right * speed * Time.deltaTime);
+    }
+
+    public bool CheckOutOfBounds()
+    {
+        var pos = transform.position;
+        if (pos.x > SpawnManager.RightBound
+            || pos.x < SpawnManager.LeftBound
+            || pos.y > SpawnManager.UpperBound
+            || pos.y < SpawnManager.LowerBound)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -13,12 +13,6 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI scoreText;
 
     [SerializeField]
-    private TextMeshProUGUI gameOverText;
-
-    [SerializeField]
-    private Button restartButton;
-
-    [SerializeField]
     private Button startButton;
 
     [SerializeField]
@@ -37,7 +31,6 @@ public class GameManager : MonoBehaviour
         IsGameActive = false;
 
         StartCoroutine(WaitForExplosion());
-
     }
 
     private IEnumerator WaitForExplosion()
