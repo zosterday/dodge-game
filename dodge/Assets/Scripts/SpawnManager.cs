@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
 
     public const float LeftBound = -10f;
 
-    private const int MaxSpawnCount = 11;
+    private const int MaxSpawnCount = 13;
 
     [SerializeField]
     private GameManager gameManager;
@@ -21,9 +21,12 @@ public class SpawnManager : MonoBehaviour
 
     private int spawnCount;
 
+    private bool gameOver;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameOver = false;
         spawningStarted = false;
         spawnCount = 1;
     }
@@ -36,12 +39,30 @@ public class SpawnManager : MonoBehaviour
             return;
         }
 
+        if (GameManager.GameEnded && !gameOver)
+        {
+            CancelSpawns();
+            return;
+        }
+
         if (!spawningStarted)
         {
-            InvokeRepeating(nameof(SpawnObject), 1.5f, 0.1f);
-            InvokeRepeating(nameof(IncreaseSpawnCount), 5f, 8f);
-            spawningStarted = true;
+            StartSpawns();
         }
+    }
+
+    private void StartSpawns()
+    {
+        InvokeRepeating(nameof(SpawnObject), 1.5f, 1f);
+        InvokeRepeating(nameof(IncreaseSpawnCount), 5f, 8f);
+        spawningStarted = true;
+    }
+
+    private void CancelSpawns()
+    {
+        gameOver = true;
+        CancelInvoke(nameof(SpawnObject));
+        CancelInvoke(nameof(IncreaseSpawnCount));
     }
 
     private void SpawnObject()

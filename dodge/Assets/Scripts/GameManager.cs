@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool GameEnded;
+
     public bool IsGameActive { get; set; }
 
     [SerializeField]
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         IsGameActive = false;
+        GameEnded = true;
 
         StartCoroutine(WaitForExplosion());
     }
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        GameEnded = false;
         startButton.gameObject.SetActive(false);
         IsGameActive = true;
         score = 0;
