@@ -20,7 +20,24 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject gameoverPanel;
 
+    private float timeCount;
+
     private int score;
+
+    private void Update()
+    {
+        if (!IsGameActive)
+        {
+            return;
+        }
+
+        timeCount += Time.deltaTime;
+
+        if ((int)timeCount > score)
+        {
+            UpdateScore(1);
+        }
+    }
 
     public void UpdateScore(int scoreToAdd)
     {
