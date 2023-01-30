@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
 
     public const float LeftBound = -10f;
 
-    private const int MaxSpawnCount = 12;
+    private const int MaxSpawnCount = 11;
 
     [SerializeField]
     private GameManager gameManager;
@@ -50,16 +50,15 @@ public class SpawnManager : MonoBehaviour
         {
             //Get obstacle to spawn
             var obstacle = ObjectPooler.Instance.GetObstacleObject();
-            var obTransform = obstacle.transform;
 
             //Set obstacle position
             var spawnPos = GenerateSpawnPos();
-            obTransform.position = spawnPos;
+            obstacle.transform.position = spawnPos;
 
             //Set obstacle rotation
             var rotation = Random.Range(-42f, 42f);
-            obTransform.LookAt(Vector2.zero);
-            obTransform.eulerAngles = new Vector3(0f, 0f, obTransform.eulerAngles.z + rotation);
+            obstacle.transform.right = (Vector3.zero - spawnPos).normalized;
+            obstacle.transform.eulerAngles = new Vector3(0f, 0f, obstacle.transform.eulerAngles.z + rotation);
 
             obstacle.gameObject.SetActive(true);
         }
@@ -87,7 +86,7 @@ public class SpawnManager : MonoBehaviour
                 break;
 
             case SpawnType.left:
-                spawnPos = new Vector3(-LeftBound, spawnPosValY, -1f);
+                spawnPos = new Vector3(LeftBound, spawnPosValY, -1f);
                 break;
 
             default:
