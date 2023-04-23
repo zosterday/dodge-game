@@ -7,7 +7,11 @@ public class PlayerController : MonoBehaviour
     private const string ObstacleTag = "Obstacle";
 
     private const string PlayerSprite = "PlayerSprite";
-    
+
+    private const float XBounds = 9.75f;
+
+    private const float YBounds = 7.225f;
+
     [SerializeField]
     private GameManager gameManager;
 
@@ -40,6 +44,23 @@ public class PlayerController : MonoBehaviour
         var mousePos = camMain.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = camMain.transform.position.z + camMain.nearClipPlane;
         transform.position = Vector3.Lerp(transform.position, mousePos, 0.1f);
+
+        if (transform.position.x > XBounds)
+        {
+            transform.position = new Vector3(XBounds, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x < -XBounds)
+        {
+            transform.position = new Vector3(-XBounds, transform.position.y, transform.position.z);
+        }
+        if (transform.position.y > YBounds)
+        {
+            transform.position = new Vector3(transform.position.x, YBounds, transform.position.z);
+        }
+        else if (transform.position.y < -YBounds)
+        {
+            transform.position = new Vector3(transform.position.x, -YBounds, transform.position.z);
+        }
     }
 
     private void EndGame()
