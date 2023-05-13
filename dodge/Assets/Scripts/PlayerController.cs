@@ -68,8 +68,9 @@ public class PlayerController : MonoBehaviour
         explosionParticle.gameObject.SetActive(true);
         explosionParticle.transform.position = transform.position;
         explosionParticle.Play();
-        var planeMesh = transform.Find(PlayerSprite);
-        planeMesh.gameObject.SetActive(false);
+        var sprite = transform.Find(PlayerSprite);
+        sprite.gameObject.SetActive(false);
+
         gameManager.GameOver();
     }
 
